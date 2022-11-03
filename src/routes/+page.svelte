@@ -74,13 +74,17 @@
     
     
   </div>
+  <p class="text-xs" id="signature">Made by Reid</p>
 </div>
+
 
 {#if showConfetti}
     <div id="confetti">
             <Confetti infinite />
         </div>
         {/if}
+
+
 
 
 <style>
@@ -114,6 +118,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
-
+}
+#id {
+    position: fixed;
+    bottom: -20px;
+    left: 50%;
 }
 </style>
