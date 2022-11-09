@@ -14,6 +14,8 @@
     let problemStatements = [];
     let problemSolutions = [];
 
+    let maxChar = 60;
+
     function submitCommand(e){
         if(input.length > 0){
             commands.push({text:input});
@@ -21,23 +23,61 @@
 
 
             if(input == problemSolutions[problemIndex]){
-                commands.push({class: "text-success", text: "Correct!"})
+                // commands.push({class: "text-success", text: "Correct!"})
+                addCommand("text-success", "Correct!");
                 problemIndex++;
                 if(problemIndex < problemStatements.length){
-                    commands.push({class: "text-warning", text: problemStatements[problemIndex]})
+                    // commands.push({class: "text-warning", text: problemStatements[problemIndex]})
+                    addCommand("text-warning", problemStatements[problemIndex]);
                 }
                 else {
-                    commands.push({class: "text-success", text: "You have solved all the problems!"})
+                    // commands.push({class: "text-success", text: "You have solved all the problems!"})
+                    addCommand("text-success", "You have solved all the problems!");
                     showConfetti = true;
                 }
             }
             else{
-                commands.push({class: "text-error", text: "Incorrect"})
+                // commands.push({class: "text-error", text: "Incorrect"})
+                addCommand("text-error", "Incorrect");
             }
 
             input = "";
         }
         focusText();
+    }
+
+    //given a class and a text problem, split it up across multiple commands as to preserve line spacing
+    //TODO
+    function addCommand(c, t){
+        let textArray = [];
+        if(t.length > maxChar){
+            let wordArray = t.split(" ");
+            let reducedCommand = "";
+            wordArray.forEach(word => {
+                if(reducedCommand.length + word.length < maxChar){
+                    reducedCommand += word + " ";
+                }
+                else{
+                    textArray.push(reducedCommand);
+                    reducedCommand = word + " ";
+                }
+            });
+            textArray.push(reducedCommand);
+        }
+        else{
+            textArray.push(t);
+        }
+        
+        textArray.forEach(text => {
+            commands.push({class: c, text});
+        });
+        commands = commands;
+    }
+
+    function determineWidth(){
+        let clientWidth = document.getElementById("terminal").clientWidth;
+
+        maxChar = 0;
     }
 
 
@@ -61,8 +101,7 @@
 
 
         //Begin program by showing the first problem statement
-        commands.push({class: "text-warning", text: problemStatements[0]});
-        commands = commands;
+        addCommand("text-warning", problemStatements[0])
 
         
         
@@ -84,7 +123,7 @@
 
 <p class="password">Password is "Reid is awesome"</p>
 
-<div class="mockup-code w-1/2 mt-10 h-96" on:click={focusText} on:keydown={focusText}>
+<div class="mockup-code mt-10 h-96" id="terminal" on:click={focusText} on:keydown={focusText}>
     <pre data-prefix="$"><code>GU Hacker Terminal</code></pre> 
 
     {#each commands as command}
@@ -125,6 +164,9 @@
     .mockup-code{
         overflow-y: scroll;
         overflow-x: auto;
+        max-width: 1200px;
+        width: 80%;
+        min-width: 500px;
     }
     .mockup-code::-webkit-scrollbar {
   width: 1em;
@@ -147,9 +189,9 @@
     top: 50%;
     left: 50%;
 }
-#id {
+/* #id {
     position: fixed;
     bottom: -20px;
     left: 50%;
-}
+} */
 </style>
