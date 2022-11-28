@@ -47,7 +47,7 @@
     }
 
     //given a class and a text problem, split it up across multiple commands as to preserve line spacing
-    //TODO
+    //Then add the command to the console
     function addCommand(c, t){
         let textArray = [];
         if(t.length > maxChar){
@@ -189,9 +189,4 @@
     top: 50%;
     left: 50%;
 }
-/* #id {
-    position: fixed;
-    bottom: -20px;
-    left: 50%;
-} */
 </style>
