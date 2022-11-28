@@ -121,7 +121,7 @@
     Geering Up Hacker Database
 </h1>
 
-<p class="password">Password is "Reid awesome"</p>
+<p class="password">Password is "Reid is awesome"</p>
 
 <div class="mockup-code mt-10 h-96" id="terminal" on:click={focusText} on:keydown={focusText}>
     <pre data-prefix="$"><code>GU Hacker Terminal</code></pre> 
