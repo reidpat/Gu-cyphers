@@ -38,6 +38,7 @@
                     // commands.push({class: "text-success", text: "You have solved all the problems!"})
                     addCommand("text-success", "You have solved all the problems!");
                     showConfetti = true;
+                    setInterval(()=>{terminalElement.scrollTop = terminalElement.scrollHeight}, 200)
                 }
             }
             else{
