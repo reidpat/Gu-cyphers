@@ -16,6 +16,10 @@
 
     let maxChar = 60;
 
+    function updateScroll(){
+        textElement.scrollIntoView({behavior: "smooth"});
+    }
+
     function submitCommand(e){
         if(input.length > 0){
             commands.push({text:input});
@@ -42,8 +46,9 @@
             }
 
             input = "";
+            setInterval(updateScroll, 500);
         }
-        focusText();
+        
     }
 
     //given a class and a text problem, split it up across multiple commands as to preserve line spacing
@@ -72,6 +77,9 @@
             commands.push({class: c, text});
         });
         commands = commands;
+        
+        terminalElement.scrollTop = terminalElement.scrollHeight;
+        focusText();
     }
 
     function determineWidth(){
@@ -82,8 +90,10 @@
 
 
     let textElement;
+    let terminalElement;
     onMount(()=>{
         textElement = document.getElementById("codeInput");
+        terminalElement = document.getElementById("terminal");
         focusText();
 
         
@@ -148,8 +158,8 @@
 {#if showConfetti}
     <div id="confetti">
             <Confetti infinite />
-        </div>
-        {/if}
+    </div>
+{/if}
 
 
 
