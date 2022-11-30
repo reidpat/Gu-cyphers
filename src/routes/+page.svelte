@@ -13,15 +13,59 @@
     let problemIndex = 0;
     let problemStatements = [];
     let problemSolutions = [];
+    let maxChar = 100;
+    let problemSolIndex = 0;
+    //added variable to track what part of the multi step problem we are at
 
     function submitCommand(e){
+        if (Array.isArray(problemSolutions[problemIndex])){
+            //added functionality where there may be multiple options that the user has to enter correctly in a row otherwise they have to start over
+            //if the problem solution is an array, it means it will be multi step problem
+            if(input.length > 0){
+            commands.push({text:input});
+            commands = commands;
+
+            if(input.toLowerCase() == problemSolutions[problemIndex][problemSolIndex]){
+                // added to LowerCase to catch accidental uppercases
+                if(problemSolIndex==problemSolutions[problemIndex].length-1){
+                    //only when we reach the end of the multi step problem do we move on
+                    addCommand("text-success", "Correct!!");
+                    problemIndex++;
+                }
+                else{
+                    problemSolIndex++;
+                    addCommand("text-successs", "Correct!");
+                    addCommand("text-warning", problemStatements[problemIndex][problemSolIndex]);
+                    //will display next part of question
+                    
+                }
+            }
+            else{
+                // commands.push({class: "text-error", text: "Incorrect"})
+                addCommand("text-error", "Incorrect, start from beginning of problem");
+                problemSolIndex=0;
+                //if the answer is wrong, they have to restart
+            }
+
+        input = "";
+        }
+            
+        focusText();
+
+        }
+        else{
+        //if it is not a multi step problem then the code is that same as it was
+            if(input.length > 0){
             commands.push({text:input});
             commands = commands;
 
 
+            if(input.toLowerCase() == problemSolutions[problemIndex]){
+                //added to catch accidental uppercases
                 // commands.push({class: "text-success", text: "Correct!"})
                 addCommand("text-success", "Correct!");
                 problemIndex++;
+
             }
             else{
                 // commands.push({class: "text-error", text: "Incorrect"})
@@ -102,10 +146,6 @@
 
         //Example problems:
         problemStatements.push("Find the hidden password on the page and enter it below")
-        problemSolutions.push("Reid is awesome")
-        problemStatements.push("What is the best summer camp in the world?");
-        problemSolutions.push("Geering Up");
-
         problemSolutions.push("you can't find me")
         problemStatements.push("OY SGEUTTGOYK GT OTYZXASKTZ (C5)");
         problemSolutions.push("is mayonnaise an instrument");
