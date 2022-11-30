@@ -14,27 +14,14 @@
     let problemStatements = [];
     let problemSolutions = [];
 
-    let maxChar = 60;
-
     function submitCommand(e){
-        if(input.length > 0){
             commands.push({text:input});
             commands = commands;
 
 
-            if(input == problemSolutions[problemIndex]){
                 // commands.push({class: "text-success", text: "Correct!"})
                 addCommand("text-success", "Correct!");
                 problemIndex++;
-                if(problemIndex < problemStatements.length){
-                    // commands.push({class: "text-warning", text: problemStatements[problemIndex]})
-                    addCommand("text-warning", problemStatements[problemIndex]);
-                }
-                else {
-                    // commands.push({class: "text-success", text: "You have solved all the problems!"})
-                    addCommand("text-success", "You have solved all the problems!");
-                    showConfetti = true;
-                }
             }
             else{
                 // commands.push({class: "text-error", text: "Incorrect"})
@@ -44,6 +31,26 @@
             input = "";
         }
         focusText();
+        }
+        if(problemIndex < problemStatements.length){
+            // commands.push({class: "text-warning", text: problemStatements[problemIndex]})
+            if (Array.isArray(problemStatements[problemIndex])){
+                if (problemSolIndex ==0){
+                    //will display beginning of multistep question only if it is the beginning of the question
+                    addCommand("text-warning", problemStatements[problemIndex][0]);
+                }
+                // Check if there will be multiple problemStatements in one problem. If problemStatements is an array with multiple statements then will only display the first
+            }
+            else{
+                addCommand("text-warning", problemStatements[problemIndex]);
+            }
+            
+            }
+        else {
+            // commands.push({class: "text-success", text: "You have solved all the problems!"})
+            addCommand("text-success", "You have solved all the problems!");
+            showConfetti = true;
+            }
     }
 
     //given a class and a text problem, split it up across multiple commands as to preserve line spacing
