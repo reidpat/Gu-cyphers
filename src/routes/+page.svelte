@@ -155,9 +155,9 @@
         //repeat above two lines for each problem
 
         //Example problems:
-        problemStatements.push("Find the hidden password on the page and enter it below")
+        problemStatements.push("Find the hidden password on the website and enter it below")
         problemSolutions.push("you can't find me")
-        problemStatements.push("OY SGEUTTGOYK GT OTYZXASKTZ (C5)");
+        problemStatements.push("OY SGEUTTGOYK GT OTYZXASKTZ (C6)");
         problemSolutions.push("is mayonnaise an instrument");
         problemStatements.push("What color is hidden in this sentence:  \n'Temper or anger are signs of weakness'");
         problemSolutions.push("orange");
@@ -167,6 +167,8 @@
         problemSolutions.push("yes")
         problemStatements.push(["Question 1. Decode the message","Question 2. How many hexagons can you find?","Question 3. Which is these figures is wrong","Question 4. What time was earl in the room", "What room was Tess in(just the number)","What room was Grad in(just the number)","Question 5. Who came in first place?", "Who came in second place", "Who came in last place"])
         problemSolutions.push(["hello","21","b","11:20", "215", "202", "johannes", "rene", "louis"])
+        problemStatements.push("You have gotten passed all of the firewalls so far. You now have a final password to encode: sflhqfh (C?)")
+        problemSolutions.push("science")
 
         //Begin program by showing the first problem statement
         addCommand("text-warning", problemStatements[0])
